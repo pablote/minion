@@ -2,8 +2,6 @@ package lib
 
 import (
 	"bytes"
-	"fmt"
-	"log"
 	"os/exec"
 )
 
@@ -19,8 +17,8 @@ func RunCommand(name, dir string, args ...string) (string, string, error) {
 	//log.Println("[INFO] Run command: ", name, args)
 
 	if err := cmd.Run(); err != nil {
-		log.Println(fmt.Sprintf("[DEBUG] Run command: stdout: %v", stdout.String()))
-		log.Println(fmt.Sprintf("[DEBUG] Run command: stderr: %v", stderr.String()))
+		//log.Println(fmt.Sprintf("[DEBUG] Run command: stdout: %v", stdout.String()))
+		//log.Println(fmt.Sprintf("[DEBUG] Run command: stderr: %v", stderr.String()))
 		return stdout.String(), stderr.String(), err
 	}
 
