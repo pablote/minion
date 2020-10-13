@@ -1,0 +1,54 @@
+package cmd
+
+import (
+	"fmt"
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
+"github.com/spf13/viper"
+	"os"
+)
+
+var cfgFile string
+
+var rootCmd = &cobra.Command{
+	Use:   "run-cli",
+	Short: "run cli",
+	Long: `run-cli runs commands on multiple directories`,
+	Run: func(cmd *cobra.Command, args []string) {
+		_ = cmd.Help()
+	},
+}
+
+func Execute() {
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+func init() {
+	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/run-cli.yaml)")
+}
+
+func initConfig() {
+	if cfgFile != "" {
+		viper.SetConfigFile(cfgFile)
+	} else {
+		// Find home directory.
+		home, err := homedir.Dir()
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		// Search config in home directory with name ".cobra" (without extension).
+		viper.AddConfigPath(home)
+		viper.SetConfigName("run-cli")
+	}
+
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println("Can't read config:", err)
+		os.Exit(1)
+	}
+}

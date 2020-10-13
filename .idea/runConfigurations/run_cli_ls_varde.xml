@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="run-cli ls varde" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="run-cli" />
+    <working_directory value="$PROJECT_DIR$" />
+    <go_parameters value="-i" />
+    <parameters value="ls varde" />
+    <kind value="FILE" />
+    <filePath value="$PROJECT_DIR$/main.go" />
+    <package value="run-cli" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
