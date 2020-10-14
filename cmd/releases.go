@@ -14,8 +14,8 @@ func init() {
 
 var releasesCmd = &cobra.Command{
 	Use:   "releases",
-	Short: "Open releases",
-	Long:  `Open releases`,
+	Short: "Show open releases",
+	Long:  `Show open releases`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		paths := lib.GetPaths(args)

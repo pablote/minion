@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"run-cli/lib"
 
 	"github.com/spf13/cobra"
@@ -13,7 +12,7 @@ func init() {
 
 var updateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "Update all repos",
+	Short: "Update repos",
 	Long:  `Update all develop and master branches to match origin in all repos`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -33,7 +32,7 @@ func updateFn(path string) error {
 
 	branchesToUpdate := []string{"master", "develop"}
 	for _, branch := range branchesToUpdate {
-		hasBranch, err := hasBranch(path, branch)
+		hasBranch, err := lib.HasBranch(path, branch)
 		if err != nil {
 			return err
 		}
@@ -52,17 +51,4 @@ func updateFn(path string) error {
 	}
 
 	return nil
-}
-
-func hasBranch(path, branch string) (bool, error) {
-	response, _, err := lib.RunCommand("git", path, "show-ref", fmt.Sprintf("refs/heads/%v", branch))
-	if err != nil {
-		return false, nil
-	}
-
-	if len(response) > 0 {
-		return true, nil
-	}
-
-	return false, nil
 }
