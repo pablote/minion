@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"run-cli/lib"
+	"minion/lib"
 
 	"github.com/spf13/cobra"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"run-cli/cmd"
+	"minion/cmd"
 )
 
 func main() {

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="run-cli" type="GoApplicationRunConfiguration" factoryName="Go Application">
-    <module name="run-cli" />
+    <module name="minion" />
     <working_directory value="$PROJECT_DIR$" />
     <go_parameters value="-i" />
     <kind value="FILE" />

@@ -11,9 +11,9 @@ import (
 var cfgFile string
 
 var rootCmd = &cobra.Command{
-	Use:   "run-cli",
-	Short: "run cli",
-	Long: `run-cli runs commands on multiple directories`,
+	Use:   "minion",
+	Short: "minion",
+	Long: `minion runs commands on multiple directories`,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Help()
 	},
@@ -28,7 +28,7 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/run-cli.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/minion.yaml)")
 }
 
 func initConfig() {
@@ -44,7 +44,7 @@ func initConfig() {
 
 		// Search config in home directory with name ".cobra" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName("run-cli")
+		viper.SetConfigName("minion")
 	}
 
 	if err := viper.ReadInConfig(); err != nil {
