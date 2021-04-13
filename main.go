@@ -1,7 +1,7 @@
 package main
 
 import (
-	"minion/cmd"
+	"github.com/pablote/minion/cmd"
 )
 
 func main() {

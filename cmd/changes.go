@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"minion/lib"
+	"github.com/pablote/minion/lib"
 	"strings"
 
 	"github.com/spf13/cobra"

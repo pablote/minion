@@ -1,4 +1,4 @@
-module minion
+module github.com/pablote/minion
 
 go 1.16
 

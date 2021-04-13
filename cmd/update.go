@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"minion/lib"
+	"github.com/pablote/minion/lib"
 
 	"github.com/spf13/cobra"
 )
