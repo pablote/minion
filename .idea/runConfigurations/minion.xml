@@ -1,8 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="run-cli releases varde" type="GoApplicationRunConfiguration" factoryName="Go Application">
+  <configuration default="false" name="minion" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="minion" />
     <working_directory value="$PROJECT_DIR$" />
-    <parameters value="releases varde" />
     <kind value="FILE" />
     <package value="run-cli" />
     <directory value="$PROJECT_DIR$" />
