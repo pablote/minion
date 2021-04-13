@@ -28,18 +28,18 @@ var changesCmd = &cobra.Command{
 func changesFn(path string) error {
 	hasMaster, err := lib.HasBranch(path, "master")
 	if err != nil {
-		return nil
+		return err
 	}
 
 	hasDevelop, err := lib.HasBranch(path, "develop")
 	if err != nil {
-		return nil
+		return err
 	}
 
 	if hasMaster && hasDevelop {
 		response, _, err := lib.RunCommand("git", path, "log", "--pretty=oneline", "--no-merges", "develop", "^master")
 		if err != nil {
-			return nil
+			return err
 		}
 
 		if len(response) > 0 {

@@ -2,12 +2,11 @@
   <configuration default="false" name="run-cli releases varde" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="minion" />
     <working_directory value="$PROJECT_DIR$" />
-    <go_parameters value="-i" />
     <parameters value="releases varde" />
     <kind value="FILE" />
-    <filePath value="$PROJECT_DIR$/main.go" />
     <package value="run-cli" />
     <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/main.go" />
     <method v="2" />
   </configuration>
 </component>
