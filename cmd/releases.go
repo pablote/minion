@@ -26,7 +26,7 @@ var releasesCmd = &cobra.Command{
 	},
 }
 
-func releasesFn(path string) error {
+func releasesFn(path string) (string, error) {
 	argsList := [][]string{
 		{"branch"},
 		{"branch", "-r"},
@@ -37,7 +37,7 @@ func releasesFn(path string) error {
 	for _, args := range argsList {
 		response, _, err := lib.RunCommand("git", path, args...)
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		for _, branch := range strings.Split(response, "\n") {
@@ -47,12 +47,13 @@ func releasesFn(path string) error {
 		}
 	}
 
+	output := &strings.Builder{}
 	if len(branches) > 0 {
-		fmt.Println(path + ":")
+		_, _ = fmt.Fprintf(output, "%v:", path)
 		for _, branch := range branches {
-			fmt.Printf("\t%v:\n", branch)
+			_, _ = fmt.Fprintf(output, "\t%v:\n", branch)
 		}
 	}
 
-	return nil
+	return output.String(), nil
 }

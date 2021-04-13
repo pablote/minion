@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"minion/lib"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -20,33 +21,34 @@ var changesCmd = &cobra.Command{
 		paths := lib.GetPaths(args)
 		lib.Runner{
 			Paths: paths,
-			Fn: changesFn,
+			Fn:    changesFn,
 		}.Execute()
 	},
 }
 
-func changesFn(path string) error {
+func changesFn(path string) (string, error) {
 	hasMaster, err := lib.HasBranch(path, "master")
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	hasDevelop, err := lib.HasBranch(path, "develop")
 	if err != nil {
-		return err
+		return "", err
 	}
 
+	output := &strings.Builder{}
 	if hasMaster && hasDevelop {
 		response, _, err := lib.RunCommand("git", path, "log", "--pretty=oneline", "--no-merges", "develop", "^master")
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		if len(response) > 0 {
-			fmt.Println(fmt.Sprintf("Changes for %v:\n", path))
-			fmt.Println(response)
+			_, _ = fmt.Fprintf(output, "Changes for %v:\n", path)
+			_, _ = fmt.Fprintf(output, "%v\n", response)
 		}
 	}
 
-	return err
+	return output.String(), nil
 }

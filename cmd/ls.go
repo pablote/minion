@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"minion/lib"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -19,9 +21,13 @@ var lsCmd = &cobra.Command{
 		paths := lib.GetPaths(args)
 		lib.Runner{
 			Paths: paths,
-			Fn: func(path string) error {
-				_, _, err := lib.RunCommand("ls", path, "-l")
-				return err
+			Fn: func(path string) (string, error) {
+				stdout, _, err := lib.RunCommand("ls", path, "-l")
+
+				output := &strings.Builder{}
+				_, _ = fmt.Fprintf(output, "%v:\n", path)
+				_, _ = fmt.Fprintf(output, "%v\n", stdout)
+				return output.String(), err
 			},
 		}.Execute()
 	},

@@ -24,31 +24,31 @@ var updateCmd = &cobra.Command{
 	},
 }
 
-func updateFn(path string) error {
+func updateFn(path string) (string, error) {
 	_, _, err := lib.RunCommand("git", path, "fetch", "--all", "--prune")
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	branchesToUpdate := []string{"master", "develop"}
 	for _, branch := range branchesToUpdate {
 		hasBranch, err := lib.HasBranch(path, branch)
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		if hasBranch {
 			_, _, err := lib.RunCommand("git", path, "checkout", branch)
 			if err != nil {
-				return err
+				return "", err
 			}
 
 			_, _, err = lib.RunCommand("git", path, "pull", "origin", branch)
 			if err != nil {
-				return err
+				return "", err
 			}
 		}
 	}
 
-	return nil
+	return "", nil
 }
