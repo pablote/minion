@@ -5,7 +5,7 @@ Minion runs commands on multiple directories
 ## Install
 
 ```shell
-$ curl -sf https://gobinaries.com/pablote/minion
+$ curl -sf https://gobinaries.com/pablote/minion | sh
 ```
 
 Add a config file to your home:
