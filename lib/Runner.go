@@ -1,9 +1,13 @@
 package lib
 
 import (
+	"context"
 	"fmt"
+	"golang.org/x/sync/semaphore"
 	"sync"
 )
+
+const concurrencyLevel = 4
 
 type Runner struct {
 	Paths []string
@@ -12,14 +16,20 @@ type Runner struct {
 
 func (r Runner) Execute() {
 	outputCh := make(chan string, len(r.Paths))
-
 	wg := &sync.WaitGroup{}
 	wg.Add(len(r.Paths))
+	s := semaphore.NewWeighted(concurrencyLevel)
+	c := context.TODO()
+	c.Done()
 
 	// run fn for all paths
 	for _, path := range r.Paths {
 		go func(path string) {
-			fmt.Printf("Starting for %v\n", path)
+			err := s.Acquire(c, 1)
+			if err != nil {
+				panic(err)
+			}
+
 			output, err := r.Fn(path)
 
 			if err != nil {
@@ -31,6 +41,7 @@ func (r Runner) Execute() {
 			}
 
 			wg.Done()
+			s.Release(1)
 		}(path)
 	}
 
