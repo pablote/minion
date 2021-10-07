@@ -2,7 +2,7 @@
 
 Minion runs commands on multiple directories
 
-## Easy Install
+## Install
 
 ```shell
 $ curl -sf https://gobinaries.com/pablote/minion
@@ -24,3 +24,7 @@ anotherProject:
   - /path/to/microservice/b
   - /path/to/microservice/c
 ```
+
+## Usage
+
+`TODO`
