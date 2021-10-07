@@ -19,8 +19,7 @@ func (r Runner) Execute() {
 	wg := &sync.WaitGroup{}
 	wg.Add(len(r.Paths))
 	s := semaphore.NewWeighted(concurrencyLevel)
-	c := context.TODO()
-	c.Done()
+	c := context.Background()
 
 	// run fn for all paths
 	for _, path := range r.Paths {
