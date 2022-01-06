@@ -27,4 +27,4 @@ anotherProject:
 
 ## Usage
 
-`TODO`
+Run `minion` to get a list of available commands and help.
