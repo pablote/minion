@@ -30,6 +30,11 @@ func updateFn(path string) (string, error) {
 		return "", err
 	}
 
+	_, _, err = lib.RunCommand("git", path, "fetch", "--all", "--tags")
+	if err != nil {
+		return "", err
+	}
+
 	branchesToUpdate := []string{"master", "develop"}
 	for _, branch := range branchesToUpdate {
 		hasBranch, err := lib.HasBranch(path, branch)

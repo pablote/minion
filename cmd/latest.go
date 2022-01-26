@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/hashicorp/go-version"
 	"github.com/pablote/minion/lib"
+	"sort"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -32,8 +34,10 @@ func latestFn(path string) (string, error) {
 		return "", err
 	}
 
+	// convert response into a list of strings
 	tags := strings.Split(response, "\n")
 
+	// strip v prefix
 	versionTags := make([]string, 0)
 	for _, tag := range tags {
 		if strings.HasPrefix(tag, "v") {
@@ -41,6 +45,24 @@ func latestFn(path string) (string, error) {
 		}
 	}
 
+	// sort based on sem ver
+	sort.Slice(versionTags, func(i, j int) bool {
+		v1, err := version.NewVersion(versionTags[i])
+		if err != nil {
+			fmt.Println("failed to parse version %s", versionTags[i])
+			return false
+		}
+
+		v2, err := version.NewVersion(versionTags[j])
+		if err != nil {
+			fmt.Println("failed to parse version %s", versionTags[j])
+			return false
+		}
+
+		return v1.LessThan(v2)
+	})
+
+	// get the latest
 	latest := ""
 	if len(versionTags) >= 1 {
 		latest = versionTags[len(versionTags)-1]
