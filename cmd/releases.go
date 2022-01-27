@@ -49,7 +49,7 @@ func releasesFn(path string) (string, error) {
 
 	output := &strings.Builder{}
 	if len(branches) > 0 {
-		_, _ = fmt.Fprintf(output, "%v:", path)
+		_, _ = fmt.Fprintf(output, "%v:\n", path)
 		for _, branch := range branches {
 			_, _ = fmt.Fprintf(output, "\t%v:\n", branch)
 		}
