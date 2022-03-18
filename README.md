@@ -8,6 +8,12 @@ Minion runs commands on multiple directories
 $ curl -sf https://gobinaries.com/pablote/minion | sh
 ```
 
+If `gobinaries` doesn't work on your system, try with `goblin`:
+
+```shell
+$ curl -sf https://goblin.reaper.im/github.com/pablote/minion | sh
+```
+
 Add a config file to your home:
 
 ```shell
