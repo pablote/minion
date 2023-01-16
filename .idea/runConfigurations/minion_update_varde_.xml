@@ -2,7 +2,7 @@
   <configuration default="false" name="minion update varde " type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="minion" />
     <working_directory value="$PROJECT_DIR$" />
-    <parameters value="update varde" />
+    <parameters value="update varde-test" />
     <kind value="FILE" />
     <package value="run-cli" />
     <directory value="$PROJECT_DIR$" />

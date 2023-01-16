@@ -18,10 +18,12 @@ require (
 	gopkg.in/ini.v1 v1.66.2 // indirect
 )
 
-require golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+require (
+	github.com/hashicorp/go-version v1.4.0
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+)
 
 require (
-	github.com/hashicorp/go-version v1.4.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
