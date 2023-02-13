@@ -4,14 +4,16 @@ Minion runs commands on multiple directories
 
 ## Install
 
+Option 1) Using gobinaries
+
 ```shell
 $ curl -sf https://gobinaries.com/pablote/minion | sh
 ```
 
-If `gobinaries` doesn't work on your system, try with `goblin`:
+Option 2) Using `go install`. Make sure $GOPATH/bin is on your path.
 
 ```shell
-$ curl -sf https://goblin.reaper.im/github.com/pablote/minion | sh
+$ go install github.com/pablote/minion@latest
 ```
 
 Add a config file to your home:
