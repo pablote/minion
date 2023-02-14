@@ -13,7 +13,7 @@ func init() {
 var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update repos",
-	Long:  `Update all develop and master branches to match origin in all repos`,
+	Long:  `Update all develop and main/master branches to match origin in all repos`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		paths := lib.GetPaths(args)
@@ -35,7 +35,12 @@ func updateFn(path string) (string, error) {
 		return "", err
 	}
 
-	branchesToUpdate := []string{"master", "develop"}
+	mainBranchName, err := lib.GetMainBranch(path)
+	if err != nil {
+		return "", err
+	}
+
+	branchesToUpdate := []string{mainBranchName, "develop"}
 	for _, branch := range branchesToUpdate {
 		hasBranch, err := lib.HasBranch(path, branch)
 		if err != nil {

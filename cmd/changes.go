@@ -14,8 +14,8 @@ func init() {
 
 var changesCmd = &cobra.Command{
 	Use:   "changes",
-	Short: "Show changes between develop and master",
-	Long:  `Show changes between develop and master`,
+	Short: "Show changes between develop and main/master",
+	Long:  `Show changes between develop and main/master`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		paths := lib.GetPaths(args)
@@ -27,7 +27,12 @@ var changesCmd = &cobra.Command{
 }
 
 func changesFn(path string) (string, error) {
-	hasMaster, err := lib.HasBranch(path, "master")
+	mainBranchName, err := lib.GetMainBranch(path)
+	if err != nil {
+		return "", err
+	}
+
+	hasMaster, err := lib.HasBranch(path, mainBranchName)
 	if err != nil {
 		return "", err
 	}
@@ -39,7 +44,7 @@ func changesFn(path string) (string, error) {
 
 	output := &strings.Builder{}
 	if hasMaster && hasDevelop {
-		response, _, err := lib.RunCommand("git", path, "log", "--pretty=oneline", "--no-merges", "develop", "^master")
+		response, _, err := lib.RunCommand("git", path, "log", "--pretty=oneline", "--no-merges", "develop", fmt.Sprintf("^%s", mainBranchName))
 		if err != nil {
 			return "", err
 		}
