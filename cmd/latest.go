@@ -49,13 +49,13 @@ func latestFn(path string) (string, error) {
 	sort.Slice(versionTags, func(i, j int) bool {
 		v1, err := version.NewVersion(versionTags[i])
 		if err != nil {
-			fmt.Println("failed to parse version %s", versionTags[i])
+			fmt.Printf("failed to parse version %s\n", versionTags[i])
 			return false
 		}
 
 		v2, err := version.NewVersion(versionTags[j])
 		if err != nil {
-			fmt.Println("failed to parse version %s", versionTags[j])
+			fmt.Printf("failed to parse version %s\n", versionTags[j])
 			return false
 		}
 
