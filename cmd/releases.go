@@ -41,7 +41,7 @@ func releasesFn(path string) (string, error) {
 		}
 
 		for _, branch := range strings.Split(response, "\n") {
-			if strings.Index(branch, "release/") > -1 {
+			if strings.Index(branch, "release/") > -1 || strings.Index(branch, "hotfix/") > -1 {
 				branches = append(branches, strings.TrimSpace(branch))
 			}
 		}
