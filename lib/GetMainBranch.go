@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"errors"
 	"strings"
 )
 
@@ -20,5 +19,5 @@ func GetMainBranch(path string) (string, error) {
 		}
 	}
 
-	return "", errors.New("unable to find either master or main in the origin repo")
+	return "", nil
 }

@@ -40,7 +40,12 @@ func updateFn(path string) (string, error) {
 		return "", err
 	}
 
-	branchesToUpdate := []string{mainBranchName, "develop"}
+	branchesToUpdate := make([]string, 0)
+	if len(mainBranchName) > 0 {
+		branchesToUpdate = append(branchesToUpdate, mainBranchName)
+	}
+	branchesToUpdate = append(branchesToUpdate, "develop") //TODO: add "develop" only if found in the repo
+
 	for _, branch := range branchesToUpdate {
 		hasBranch, err := lib.HasBranch(path, branch)
 		if err != nil {
